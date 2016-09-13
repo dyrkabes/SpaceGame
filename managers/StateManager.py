@@ -1,6 +1,9 @@
 from managers.MessageManager import MessageManager
 
 class StateManager:
+    """
+    For now it just helpes to process ship messages
+    """
     def __init__(self):
         self.message_manager = MessageManager()
         self.messages = []

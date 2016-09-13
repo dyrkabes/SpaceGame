@@ -1,45 +1,48 @@
 import copy
 
 class Path:
+    """
+    Calculates path points to draw. Simply copies the ship and makes
+    the copy to move saving marks on it's way
+    """
     def __init__(self, ship):
         self.points = []
         self.ship = copy.copy(ship)
+        self.got_to_destination = False
+
+        # when the path is found stops the ship copy
         self.ship.add_path_observer(self.path_found)
-        # inits the last point
-        # probably we will just copy 100% of the ship and make it run in our pseudocycle. And we could use the old ship and return it after but it's trashy
-        # get the end point
-        # get speeds - angle and movement
-        pass
 
     def cycle(self):
-        self.got_to_destination = False
         steps = 0
 
-        #zaplatka
+        # problem with infinite loop if the point is unreachable
         global_steps = 0
 
         while not self.got_to_destination:
             steps += 1
             global_steps += 1
             self.pseudo_act()
-            # self.ship.act()
             if steps > 6:
                 self.points.append((self.ship.x_coordinate, self.ship.y_coordinate))
                 steps = 0
-            # print("This")
             if global_steps > 3333:
-                print("WOW")
+                print("Inf loop occured")
                 break
 
-        # for i in range(7):
-        #     self.pseudo_act()
-        # self.points.append((self.ship.x_coordinate, self.ship.y_coordinate))
-
-
     def path_found(self):
+        """
+        If pseudo ship gets to it's destination it calls path_found() function
+        that stops path finding cycle
+        :return:
+        """
         self.got_to_destination = True
 
     def pseudo_act(self):
+        """
+        Calling only movement functions
+        :return: None
+        """
         self.ship.rotate()
         self.ship.move()
 

@@ -7,10 +7,14 @@ from Order import Order
 from view.AimMarker import AimMarker
 
 class OrderHelper:
+    """
+    Handles creation of new orders for a ship
+    """
 
-    # if order was the same as the already created one
+
     @staticmethod
     def is_order(ship, target):
+        # if order was the same as an already created one
         if hasattr(target, "component_type"):
             for order in ship.orders:
                 if target == order.target:
@@ -27,6 +31,7 @@ class OrderHelper:
 
     @staticmethod
     def process_order(ship, target):
+        #
         if target.component_type == Constants.ShipConstants.GRABBER:
                 OrderHelper.grabber_order_process(ship, target)
 
@@ -36,14 +41,20 @@ class OrderHelper:
 
     @staticmethod
     def grabber_order_process(ship, target):
-        # TODO: Is remove order nessesary there?
-            if target.weight <= ship.get_component(target.component_type).power:
-                if BilgeManager.is_any_bilge_free_enough(ship, target):
-                    ship.orders.append(Order(target, ship.remove_order_by_target))
-                else:
-                    ship.state_manager.new_message(TextConstants.Messages.BILDGE_NOT_ENOUGH_SPACE, urgent=True)
+        """
+        Processes new grabber order
+        :param ship:
+        :param target:
+        :return: None. Either creates a new order or creates an info label with the reason
+        why order's creation is impossible
+        """
+        if target.weight <= ship.get_component(target.component_type).power:
+            if BilgeManager.is_any_bilge_free_enough(ship, target):
+                ship.orders.append(Order(target, ship.remove_order_by_target))
             else:
-                ship.state_manager.new_message(TextConstants.Messages.GRABBER_NOT_ENOUGH_POWER, urgent=True)
+                ship.state_manager.new_message(TextConstants.Messages.BILDGE_NOT_ENOUGH_SPACE, urgent=True)
+        else:
+            ship.state_manager.new_message(TextConstants.Messages.GRABBER_NOT_ENOUGH_POWER, urgent=True)
 
     @staticmethod
     def weapon_order_process(ship, target):
@@ -65,6 +76,7 @@ class OrderHelper:
 
     @staticmethod
     def create_aim_marker(ship, target):
+        # Creates aim marker
         aim_marker = AimMarker(target)
         ship.object_processor_create_entity(
             aim_marker

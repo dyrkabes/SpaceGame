@@ -1,12 +1,13 @@
 import Constants
 
 
-#Probably not the class you could think about looking at it's name
-# For now it just stores state - like paused/unpaused (running atm)
 class GameManager:
+    """
+    Probably not the class you could think about looking at it's name
+    For now it just stores state - like paused/unpaused (running atm)
+    """
     def __init__(self):
         self.state = Constants.StateConstants.WAITING
-        self.zoom_inited = False
         self.cycles_past = 0
 
     def switch_running(self):
@@ -21,7 +22,6 @@ class GameManager:
         if self.cycles_past == 10000:
             self.cycles_past = 0
             self.state = Constants.StateConstants.WAITING
-        # add some restriction
 
     def get_state(self):
         return self.state

@@ -57,7 +57,7 @@ class DamageProcessor:
             or target.type == Constants.GeneralConstants.COMET or damage_inflicter.type == Constants.GeneralConstants.COMET):
                 if target.type != Constants.GeneralConstants.SHIP:
                     target, damage_inflicter = damage_inflicter, target
-                damage_dealt = DamageProcessor.calc_damage_dealt(target, damage_inflicter)
+                damage_dealt = DamageProcessor.calc_damage_dealt(damage_inflicter)
                 create_info_label(target,
                                   str(damage_dealt),
                                   target.state_manager.message_manager.decrease_messages_count)
@@ -97,10 +97,6 @@ class DamageProcessor:
     #TODO : rethink damage dealt part
     @staticmethod
     def calc_damage_dealt(damage_inflicter):
-        """
-        :param damage_inflicter:
-        :return: damage dealt
-        """
         return damage_inflicter.damage_dealt()
 
     @staticmethod

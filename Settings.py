@@ -1,3 +1,7 @@
+"""
+Main settings
+"""
+
 FPS = 40
 
 screen_width = 1024

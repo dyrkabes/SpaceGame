@@ -27,54 +27,41 @@ from managers.OrderHelper import OrderHelper
 
 
 class Ship(Entity):
+    # TODO: Needs lots of refactor. Probably some helper classes
     id = 0
     def __init__(self, x_coordinate, y_coordinate, x_size, y_size, object_processor):
-        # pygame.sprite.Sprite.__init__(self)
         Entity.__init__(self, x_coordinate, y_coordinate, x_size, y_size)
 
         self.x_movement_speed = 0
         self.y_movement_speed = 0
 
-
-
         self.x_destination = self.x_coordinate
         self.y_destination = self.y_coordinate
 
-
-
         self.components = []
-
-        #movement cycles
-        self.movement_cycles = 0
 
         self.angle = 0
         self.angle_destination = 0
-
-        # self.angle_speed = 0
         self.angle_speed_max = 0
 
-        #popravka na razmer korablya - kogda on perestal vrashat'sa, eshe raz delaem vrashenie
-        # mojno eshe raz ego delat' pri delta<max navernoe
-        self.rotation_faze = False
-
         self.rotatable = True
+        # Because ship rotates on arc it needs correction of angle destination
         self.rotation_check = 0
 
-        # It's for the path calculation
+        # It's for the pseudo_ship, path calculation
         self.path_found = None
 
-        self.collidable_type = Constants.CollidableTypes.COLLIDE_TARGET
         self.ship_id = copy.copy(Ship.id)
-
         self.type = Constants.GeneralConstants.SHIP
-
         self.player_ship = False
+        self.collidable_type = Constants.CollidableTypes.COLLIDE_TARGET
 
+        # Default interaction type on mouse click
         self.component_type = Constants.ShipConstants.WEAPON
 
         self.state_manager = StateManager()
 
-
+        # Hardcoded for now
         self.add_component(Engine(self))
         self.add_component(Shell(self))
         self.add_component(Grabber(self))
@@ -82,17 +69,14 @@ class Ship(Entity):
         self.add_component(Bilge(self))
         self.add_component(Weapon(self, object_processor.create_entity))
 
-
-
-        # self.movement_speed_max = self.get_component(Constants.ShipConstants.ENGINE).get_movement_speed()
         self.engine_state_changed()
-        # self.angle_speed_max = self.get_component(Constants.ShipConstants.ENGINE).get_rotation_speed()
 
         self.orders = []
+
+        # object related functions
         self.object_processor_del_entity = object_processor.destroy_entity
         self.object_processor_create_entity = object_processor.create_entity
         self.object_processor_create_info_label = object_processor.create_info_label
-
 
         self.aim_markers = []
 
@@ -124,11 +108,6 @@ class Ship(Entity):
         self.movement_speed_max = self.get_component(Constants.ShipConstants.ENGINE).get_movement_speed()
         self.angle_speed_max = self.get_component(Constants.ShipConstants.ENGINE).get_rotation_speed()
 
-        # TODO: obv
-        # self.angle_speed_max =
-
-        #TODO: If ships fails shuld we stop it right now?
-
     def move(self):
         self.set_movement_speed()
         self.x_coordinate += self.x_movement_speed
@@ -149,12 +128,6 @@ class Ship(Entity):
         else:
             self.angle_speed = 0
             self.set_destination((self.x_destination, self.y_destination))
-
-
-            # if self.rotation_check > 40 and (self.y_movement_speed >0 or self.x_movement_speed>0):
-            #     self.set_destination((self.x_destination, self.y_destination), False)
-            #     self.rotation_check = 0
-
         self.angle += self.angle_speed
 
     def act(self):
@@ -165,7 +138,6 @@ class Ship(Entity):
         self.move()
         self.check_orders_aviability()
         self.check_messages()
-        # self.rotated = False
 
     def calculate_movement_cycles(self):
         self.movement_cycles = math.hypot((self.x_coordinate-self.x_destination),

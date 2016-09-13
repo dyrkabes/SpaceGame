@@ -16,6 +16,7 @@ class ResourceManager:
         pass
 
     def load_image(self, image_name):
+        # Loads
         fullname = os.path.join(self.data_dir,
                                 os.path.join(self.image_dir, image_name))
         try:
