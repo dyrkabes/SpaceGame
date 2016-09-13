@@ -11,9 +11,6 @@ class OrderAnalyzer:
     def select_target(ship, current_system):
         """
         Selects a target for the ship
-        :param ship: ship that needs target
-        :param current_system: current system with it's objects
-        :return: None. Sets a new order for the ship
         """
         if not ship.player_ship:
             if not ship.orders:

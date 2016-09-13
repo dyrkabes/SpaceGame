@@ -21,14 +21,7 @@ class Bilge(Component):
 
     def get_damage(self, damage):
         Component.get_damage(self, damage)
-        # self.create_info_label(self.type)
-
         print("MESSAGE: bilge")
 
     def load_modules(self):
         pass
-        # self.hitpoints -= damage
-        # if self.hitpoints <= 0:
-        #     self.movement_speed = self.movement_speed_max / 50
-        #     self.engine_state_changed()
-        #     print(self.movement_speed)

@@ -2,7 +2,7 @@ import random
 
 import Constants
 
-
+# TODO: needs refactor
 class DamageProcessor:
     """
     Processes damage recieved by the entities
@@ -10,14 +10,11 @@ class DamageProcessor:
     @staticmethod
     def process_collision(target, damage_inflicter, create_info_label):
         """
-        Selects collision type to process it further
+        Selects collision type to and processes it
         Probably not the best way
-        :param target: first object
-        :param damage_inflicter: second object
         :param create_info_label: ObjectProcessor's funtion create_info_label
-        :return: None. Processes damage received
         """
-        # TODO: needs refactoring
+
         collision_type = None
         if ((target.type == Constants.GeneralConstants.SHIP and
                     damage_inflicter.type == Constants.GeneralConstants.COMET) or
@@ -65,7 +62,6 @@ class DamageProcessor:
                 DamageProcessor.process_component_damage(target)
 
                 damage_inflicter.destroy(target)
-                # return damage_inflicter, target
 
         elif collision_type == Constants.CollisionTypes.STAR_COMET:
 
@@ -80,7 +76,6 @@ class DamageProcessor:
                 target, damage_inflicter = damage_inflicter, target
             damage_inflicter.destroy(target)
             target.destroy(damage_inflicter)
-            # damage_inflicter.destroy(damage_inflicter)
 
         elif collision_type == Constants.CollisionTypes.BULLET_STAR:
             if target.type == Constants.GeneralConstants.BULLET:

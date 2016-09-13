@@ -3,15 +3,13 @@ import Constants
 
 class BilgeManager:
     """
-    Class manages filling of the ship's bilges
+    Manages filling of the ship's bilges
     """
     @staticmethod
     def select_bilge(ship, target):
         """
         Fills the most empty bilge
-        :param ship: ship filling it's bilges
         :param target: object to store
-        :return: None. Fills the suitable bilge
         """
         bilges = BilgeManager.get_bilges(ship)
         min_free_space = 10000
@@ -28,9 +26,7 @@ class BilgeManager:
     def is_any_bilge_free_enough(ship, target):
         """
         Checks if there're bilges capable to store the target
-        :param ship: ship filling it's bilges
         :param target: object to store
-        :return: True if there're bilges free enough
         """
         bilges = BilgeManager.get_bilges(ship)
         for bilge in bilges:
@@ -41,7 +37,6 @@ class BilgeManager:
     @staticmethod
     def get_bilges(ship):
         """
-        :param ship: ship which bilges we want to get
         :return: all the bilges
         """
         components = ship.get_components()
@@ -53,9 +48,7 @@ class BilgeManager:
     def analyze_rest_orders(ship):
         """
         Looks for orders that can't be performed
-        after filling the bilge
-        :param ship: ship that has filled it's bilge
-        :return: None. Removes orders impossible to perform
+        after filling the bilge and removes them
         """
         grabber_orders = [order for order in ship.orders
                           if order.component_type == Constants.ShipConstants.GRABBER]

@@ -10,9 +10,6 @@ class GravityManager:
     def apply_gravity_effects(entity, star):
         """
         Apllies gravity effects
-        :param entity: entity to apply effects on
-        :param star: star which creates those effects
-        :return: None. Entity slightly changes it's speed
         """
         x_gravity_effect, y_gravity_effect  = GravityManager.calc_gravity_effects(entity, star)
         entity.change_movement_speed(x_gravity_effect, y_gravity_effect)
@@ -21,9 +18,7 @@ class GravityManager:
     def calc_gravity_effects(entity, star):
         """
         Calculates gravity effects
-        :param entity:
-        :param star: star which creates gravity effects
-        :return: effects amount on each axis
+        :return: effect amount on each axis
         """
         x_delta = entity.x_coordinate - star.x_coordinate
         y_delta = entity.y_coordinate - star.y_coordinate

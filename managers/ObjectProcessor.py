@@ -9,6 +9,10 @@ from view.InterfaceElements.InfoLabel import InfoLabel
 
 
 class ObjectProcessor:
+    """
+    Processes all the object related actions such as creation and
+    destroying and all collateral actions
+    """
     def __init__(self):
         self.current_system = None
         self.resource_manager = None
@@ -27,10 +31,11 @@ class ObjectProcessor:
 
     def create_entity(self, entity):
         """
-        Creates entity. For now entities instance is given outside the procedure
+        Creates entity. Adds it to all nessesary lists
+        and performs all the nessesary actions.
+        For now entities instance is given outside the procedure
         that should be fixed i think
         :param entity: created entity
-        :return: None. Adds entity to all necessary lists and performs other actions
         """
         self.current_system.append_entity(entity)
         self.resource_manager.set_image(entity, entity.get_images_names())
@@ -54,10 +59,9 @@ class ObjectProcessor:
 
     def destroy_entity(self, entity, collide_target=None):
         """
-        Destroys entity and perfoms necessary actions
+        Destroys entity and perfoms necessary actions: creates chunks/explosion
         :param entity: entity to destroy
         :param collide_target: needed in case it is a comet
-        :return: None. Removes the entity from lists and creates chunks/explosion
         """
         self.current_system.remove_entity(entity)
         self.create_chunks(entity, collide_target)
@@ -65,10 +69,8 @@ class ObjectProcessor:
 
     def create_chunks(self, entity, collide_target):
         """
-        Procedure for destroying a comet
-        :param entity: comet
-        :param collide_target:
-        :return: None. Creates OuterSpaceObjects
+        Procedure for destroying a comet.
+        Creates OuterSpaceObjects
         """
         if (entity.type == Constants.GeneralConstants.COMET):
             if (collide_target.type != Constants.GeneralConstants.STAR):
@@ -105,7 +107,6 @@ class ObjectProcessor:
         """
         Adds path points to the current system's list
         :param path: calculated path with it's points
-        :return: None. Appends points to the list
         """
         for point in path.points:
             new_point = PathPoint(point)
@@ -115,7 +116,7 @@ class ObjectProcessor:
 
     def erase_path(self):
         """
-        :return: Delets all the path points
+        Deletes all the path points
         """
         for entity in self.current_system.entities:
             if entity.type == Constants.GeneralConstants.POINT:
@@ -127,7 +128,6 @@ class ObjectProcessor:
         :param target: info label emitter
         :param message: text
         :param decrease_messages_count: function for the time when info label is destroyed
-        :return: None. Creates new info label
         """
         info_label = InfoLabel(target.x_coordinate + target.state_manager.message_manager.get_offset_x(),
                                target.y_coordinate + target.state_manager.message_manager.get_offset_y(),

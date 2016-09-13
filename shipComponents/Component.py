@@ -16,8 +16,6 @@ class Component(Entity):
         self.images_names = ["component.png"]
         self.image = None
 
-        # self.animatable = False
-
     def init_position(self, x_coordinate, y_coordinate):
         self.x_coordinate = x_coordinate
         self.y_coordinate = y_coordinate

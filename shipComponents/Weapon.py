@@ -15,15 +15,6 @@ class Weapon(Component):
         # TODO: Im not sure it works at all
         Component.__init__(self, ShipConstants.WEAPON, ship)
 
-        # self.aim_range = 0
-        # self.bullet_damage = 0
-        # self.bullet_duration = 0
-        # self.bullet_speed = 0
-        # self.reload = 1
-        # self.default_reload = 40
-        # self.amount_of_shots = 1
-        # self.shotgun = 1
-
         # for semiauto
         self.default_reload = 40
         self.shot_delay = 0

@@ -13,10 +13,8 @@ class ResourceManager:
         self.data_dir = data_dir
         self.image_dir = image_dir
 
-        pass
-
     def load_image(self, image_name):
-        # Loads
+        # Loads image
         fullname = os.path.join(self.data_dir,
                                 os.path.join(self.image_dir, image_name))
         try:
@@ -29,6 +27,7 @@ class ResourceManager:
             return image
 
     def set_image(self, entity, images_names):
+        # sets entities image
         if entity.animatable:
             for frame_image_name in entity.animation.images_names:
                 entity.animation.images_default.append(self.load_image(frame_image_name))
@@ -45,8 +44,6 @@ class ResourceManager:
         entity.image_pressed = self.load_image(image_name_pressed)
         entity.image = entity.image_default
 
-
-
     @staticmethod
     def zoom(entity, real_world_objects=True):
         if real_world_objects:
@@ -61,5 +58,3 @@ class ResourceManager:
         entity.image = pygame.transform.smoothscale(entity.image_default,
                                               (entity.x_size*Settings.GRID_SIZE, entity.y_size*Settings.GRID_SIZE ))
         entity.image = pygame.transform.rotate(entity.image, -entity.angle)
-
-        # entity.rotated = False

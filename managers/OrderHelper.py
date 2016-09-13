@@ -10,8 +10,6 @@ class OrderHelper:
     """
     Handles creation of new orders for a ship
     """
-
-
     @staticmethod
     def is_order(ship, target):
         # if order was the same as an already created one
@@ -42,10 +40,8 @@ class OrderHelper:
     @staticmethod
     def grabber_order_process(ship, target):
         """
-        Processes new grabber order
-        :param ship:
-        :param target:
-        :return: None. Either creates a new order or creates an info label with the reason
+        Processes new grabber order. Either creates a new order
+        or creates an info label with the reason
         why order's creation is impossible
         """
         if target.weight <= ship.get_component(target.component_type).power:

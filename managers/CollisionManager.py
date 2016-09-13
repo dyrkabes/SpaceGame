@@ -13,7 +13,6 @@ class CollisionManager:
         For now all objects capable of colliding are placed in one
         list. In the future for better optimization I will palce
         them in different lists
-        :return: None
         """
         self.collidables = []
         self.current_system = None
@@ -29,16 +28,12 @@ class CollisionManager:
     def process_entity(self, entity):
         """
         Adds a new entity to collidable list
-        :param entity: entity to process
-        :return: None. Adds the entity to the list
         """
         self.collidables.append(entity)
 
     def remove_entity(self, entity):
         """
         Removes entity from the list
-        :param entity: entity to remove
-        :return: None. Removes entity
         """
         if entity.type == Constants.GeneralConstants.SHIP:
             # TODO: animation
@@ -51,7 +46,7 @@ class CollisionManager:
     def check_collided(self):
         """
         Checks if any objects collided in this tick
-        :return: in case of collision delegates it further to DamageProcessor
+        In case of collision delegates it further to DamageProcessor
         """
         num = 0
         for collidable in self.collidables:

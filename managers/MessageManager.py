@@ -1,7 +1,7 @@
 class MessageManager:
     """
     Calculates offsets for messages.
-    Needs some rework soon (slots for messages
+    Needs some rework soon (slots for messages)
     """
     def __init__(self):
         self.messages_count = 0
