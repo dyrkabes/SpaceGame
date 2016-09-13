@@ -46,7 +46,6 @@ object_processor.init_resource_manager(resource_manager, ResourceManager.zoom)
 object_processor.init_collision_manager(collision_manager)
 
 collision_manager.init_object_processor(object_processor)
-collision_manager.init_GUI(GUI)
 
 
 

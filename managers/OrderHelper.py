@@ -38,7 +38,7 @@ class OrderHelper:
     def grabber_order_process(ship, target):
         # TODO: Is remove order nessesary there?
             if target.weight <= ship.get_component(target.component_type).power:
-                if BilgeManager.is_any_bilges_free_enough(ship, target):
+                if BilgeManager.is_any_bilge_free_enough(ship, target):
                     ship.orders.append(Order(target, ship.remove_order_by_target))
                 else:
                     ship.state_manager.new_message(TextConstants.Messages.BILDGE_NOT_ENOUGH_SPACE, urgent=True)
