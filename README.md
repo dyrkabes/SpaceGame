@@ -6,7 +6,8 @@ At the moment I am refactoring and documenting the code so I can move towards
 Video example https://www.youtube.com/watch?v=uAq_awz5tZg
 
 Brief description:
-1. Player manipulates one ship, he can mvoe around, shoot, collect comets' chunks
+
+1. Player manipulates one ship, he can move around, shoot, collect comets' chunks
 2. AI driven ships for now move in random directions aiming player's ship only
 3. Comets are randomly generated, for now they're moving all the ways around. Star effects them with gravity
 4. Player ship consists of components like engine, weapon etc.
@@ -16,6 +17,7 @@ Brief description:
 
 
 What's next:
+
 1. Possibility to swap components and modules from inventory
 2. More complex module behaviour
 3. Different types of bullets (rocket, fragmentable)
