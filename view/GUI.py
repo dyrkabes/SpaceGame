@@ -1,11 +1,15 @@
 import Constants
+import Settings
 from view.InterfaceElements.InfoLabel import InfoLabel
 from view.InterfaceElements.InfoPlate import InfoPlate
+from view.InterfaceElements.Button import Button
 
 from view.InterfaceElements.Inventory import Inventory
 
 from shipComponents.Component import Component
 from shipComponents.ComponentModule import ComponentModule
+
+import copy
 
 
 class GUI:
@@ -32,6 +36,9 @@ class GUI:
 
     def add_element(self, element):
         self.elements.append(element)
+
+    def init_drawer(self, drawer):
+        self.drawer = drawer
 
     def check_if_collision(self, mouse_pos, interaction_type):
 
@@ -142,5 +149,47 @@ class GUI:
         for element in self.elements:
             if element.animatable or element.type == Constants.GUIConstants.INVENTORY:
                 element.animate()
+
+    def enviromenatal_state_changed(self):
+        if self.game_manager.enviroment_state == Constants.StateConstants.PIT_STOP:
+            # trader
+            self.create_button(Button(Settings.screen_width-275, Settings.screen_height-100, 25, 25), "inv_button.png", "inv_button_pressed.png",None)
+            # take off
+            self.create_button(Button(Settings.screen_width-250,
+                                      Settings.screen_height-100,
+                                      25, 25),
+                               "inv_button.png",
+                               "inv_button_pressed.png",
+                               self.ship.take_off)
+            # land
+            self.create_button(Button(Settings.screen_width-250,
+                                      Settings.screen_height-75,
+                                      25, 25),
+                               "inv_button.png",
+                               "inv_button_pressed.png",
+                               self.ship.land)
+
+        if self.game_manager.enviroment_state == Constants.StateConstants.LANDED:
+            for i in range(25):
+                self.drawer.zoom_in()
+                # TODO: set camera
+                # TODO: high texture planet?
+                # TODO: do not zoom the ship
+                # TODO: all other space object dont zoom as well. would be nice looking
+                # v zumalku pishem proverku tsteita. ne proshel  - ne zoom
+            pass
+
+        if self.game_manager.enviroment_state == Constants.StateConstants.OUTER_SPACE:
+            # buff_elements are needed bc after removing the element before the last it finishes the for loop
+            buff_elements = copy.copy(self.elements)
+            for element in buff_elements:
+                if (element.type == Constants.GUIConstants.BUTTON and
+                        (element.action == self.ship.take_off or
+                         element.action == self.ship.land)):
+                    self.elements.remove(element)
+                    # TODO: add merchants etc
+
+
+
 
 

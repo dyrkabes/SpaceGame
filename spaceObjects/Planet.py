@@ -10,8 +10,11 @@ class Planet(Entity):
         self.type = Constants.GeneralConstants.PLANET
 
         self.rotatable = False
+        # self.angle = 0
 
         self.collidable_type = Constants.CollidableTypes.NON_COLLIDABLE
+
+        self.component_type = Constants.ShipConstants.ENGINE
 
 
         self.init_animation(["planet.png"], 2000)
@@ -52,8 +55,6 @@ class Planet(Entity):
         delta_y = self.y_coordinate - self.star.y_coordinate
         delta_x /= math.fabs(delta_x)
         delta_y /= math.fabs(delta_y)
-
-        print(self.angle, " angle")
 
         # delt = self.movement_speed * math.sin(math.degrees(self.angle)) #* delta_x
         # print(delt)

@@ -29,13 +29,15 @@ class OrderHelper:
 
     @staticmethod
     def process_order(ship, target):
-        #
+        # TODO: merge them in 1 function i think
         if target.component_type == Constants.ShipConstants.GRABBER:
                 OrderHelper.grabber_order_process(ship, target)
 
         elif target.component_type == Constants.ShipConstants.WEAPON:
             # checking if the ship already had a weapon related order
             OrderHelper.weapon_order_process(ship, target)
+        elif target.component_type == Constants.ShipConstants.ENGINE:
+            OrderHelper.engine_order_process(ship, target)
 
     @staticmethod
     def grabber_order_process(ship, target):
@@ -54,9 +56,12 @@ class OrderHelper:
 
     @staticmethod
     def weapon_order_process(ship, target):
+        """
+        Removes old orders, creates new, creates aim marker
+        """
         for order in ship.orders:
+            # removing the old weapon orders
             if order.component_type == Constants.ShipConstants.WEAPON:
-                # removing the old ones
                 for aim_marker in ship.aim_markers:
                         if aim_marker.target.component_type == Constants.ShipConstants.WEAPON:
                             ship.aim_markers.remove(aim_marker)
@@ -69,6 +74,18 @@ class OrderHelper:
         # if it is the player's ship creating an aim marker
         if ship.player_ship:
             OrderHelper.create_aim_marker(ship, target)
+
+
+    @staticmethod
+    def engine_order_process(ship, target):
+        ship.orders.append(Order(target, ship.remove_order_by_target))
+        ship.set_destination((target.x_coordinate,
+                              target.y_coordinate))
+        print("Engine order")
+        # TODO: build path
+        # TODO: mb smth like if engine order then dest = planet.x. So it follows it until you unclick. then it just stops
+        # or goes to the prev dir
+        # TODO: and all order logic to put in this class
 
     @staticmethod
     def create_aim_marker(ship, target):

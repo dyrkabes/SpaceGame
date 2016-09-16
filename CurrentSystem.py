@@ -14,6 +14,11 @@ class CurrentSystem:
         self.x_dimension = 233
         self.y_dimension = 233
         self.entities = pygame.sprite.Group()
+        self.game_manager = None
+
+    def init_game_manager(self, game_manager):
+        self.game_manager = game_manager
+
 
     def append_entity(self, entity):
          self.entities.add(entity)
@@ -26,18 +31,9 @@ class CurrentSystem:
 
     def act(self):
         for entity in self.entities:
-            if entity.zoom_needed:
-                ResourceManager.zoom(entity)
+
             if entity.rotatable:
-                ResourceManager.rotate(entity)
-
-
-
-            # Lishnee
-            # if entity.type == Constants.GeneralConstants.POINT:
-            #     if not entity.zoom_inited:
-            #         ResourceManager.zoom(entity)
-            #         entity.zoom_inited = True
+                ResourceManager.rotate(entity, self.game_manager.enviroment_state)
 
             if (entity.type == Constants.GeneralConstants.SHIP
                     or entity.type == Constants.GeneralConstants.COMET
@@ -66,4 +62,6 @@ class CurrentSystem:
     def zoom_and_rotate(self):
         for entity in self.entities:
             if entity.rotatable:
-                ResourceManager.rotate(entity)
+                ResourceManager.rotate(entity, self.game_manager.enviroment_state)
+            else:
+                ResourceManager.zoom(entity)

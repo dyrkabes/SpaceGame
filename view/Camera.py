@@ -14,6 +14,10 @@ class Camera:
         self.x_coordinate += x_coordinate
         self.y_coordinate += y_coordinate
 
+    def move_to(self, x_coordinate, y_coordinate):
+        self.x_coordinate = x_coordinate
+        self.y_coordinate = y_coordinate
+
 
 
         #TODO : Check if object can hang from the edge of the map

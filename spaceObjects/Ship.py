@@ -28,6 +28,8 @@ from managers.OrderHelper import OrderHelper
 
 class Ship(Entity):
     # TODO: Needs lots of refactor. Probably some helper classes
+
+    # TODO: mb we need some player-ship composition
     id = 0
     def __init__(self, x_coordinate, y_coordinate, x_size, y_size, object_processor, type=Constants.GeneralConstants.SHIP):
         Entity.__init__(self, x_coordinate, y_coordinate, x_size, y_size, type)
@@ -61,6 +63,9 @@ class Ship(Entity):
 
         self.state_manager = StateManager()
 
+        self.landing_process = 0
+        self.landing_max = 10
+
         # Hardcoded for now
         self.add_component(Engine(self))
         self.add_component(Shell(self))
@@ -82,15 +87,21 @@ class Ship(Entity):
 
         self.init_animation(["ship.png", "ship_swinging1.png", "ship_swinging2.png", "ship_swinging1.png", "ship.png"], 13)
 
+    #
+    # def set_image(self, resource_manager):
+    #     self.image_default = resource_manager.load_image("ship.png")
+    #     self.image = resource_manager.load_image("ship.png")
+    #     self.rect = self.image.get_rect()
 
-    def set_image(self, resource_manager):
-        self.image_default = resource_manager.load_image("ship.png")
-        self.image = resource_manager.load_image("ship.png")
-        self.rect = self.image.get_rect()
+    def init_game_manager(self, game_manager):
+        # Link to our state managing GameManager
+        self.game_manager = game_manager
 
     def add_component(self, component):
         self.components.append(component)
         component.create_info_label = self.create_info_label
+
+
 
     def get_components(self):
         return self.components
@@ -230,6 +241,20 @@ class Ship(Entity):
                 if distance <= order_perfomer.get_distance():
                     order_perfomer.interact(order.target)
 
+            elif order_perfomer.type == Constants.ShipConstants.ENGINE:
+                if math.hypot((self.x_coordinate - order.target.x_coordinate),
+                              (self.y_coordinate - order.target.y_coordinate)) <order.target.x_size / 3:
+                    # TODO: state - landing. Impossible to change
+                    self.landing_process += 1
+                    self.game_manager.change_enviroment(Constants.StateConstants.LANDING)
+                    print("LANDING")
+                    if self.landing_process > self.landing_max:
+                        self.landing_process = 0
+                        self.game_manager.change_enviroment(Constants.StateConstants.PIT_STOP)
+                        print("PIT_STOP")
+                        self.orders.remove(order)
+
+
     def create_info_label(self, message):
         self.object_processor_create_info_label(
             self,
@@ -257,6 +282,13 @@ class Ship(Entity):
         for order in self.orders:
             if order.target == target:
                 self.orders.remove(order)
+
+    def take_off(self):
+        self.game_manager.change_enviroment(Constants.StateConstants.OUTER_SPACE)
+
+    def land(self):
+        self.game_manager.change_enviroment(Constants.StateConstants.LANDED)
+        print("Landed")
 
 
 

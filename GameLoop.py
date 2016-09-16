@@ -18,6 +18,8 @@ from view.Drawer import Drawer
 from view.GUI import GUI
 from view.InterfaceElements.Button import Button
 
+# THAT IS A TEST FILE
+
 # INITIALIZATION
 drawer = Drawer()
 controller = Controller()
@@ -35,6 +37,7 @@ GUI.init_game_manager(game_manager)
 
 drawer.set_current_system(current_system)
 drawer.init_GUI(GUI)
+drawer.init_game_manager(game_manager)
 
 controller.init_drawer_and_rec_manager(drawer, resource_manager)
 controller.init_current_system(current_system)
@@ -56,6 +59,13 @@ GUI.create_inventory()
 GUI.create_button(Button(Settings.screen_width/2-75,Settings.screen_height-100, 150, 100), "button.png", "button_pressed.png", game_manager.switch_running)
 GUI.create_button(Button(Settings.screen_width-100,Settings.screen_height-100, 100, 100), "exit_button.png", "exit_button_pressed.png", controller.quit)
 GUI.create_button(Button(Settings.screen_width-300,Settings.screen_height-100, 25, 25), "inv_button.png", "inv_button_pressed.png", GUI.switch_inventory)
+GUI.init_drawer(drawer)
+
+
+game_manager.register_enviroment_state_observer(GUI.enviromenatal_state_changed)
+game_manager.register_enviroment_state_observer(drawer.enviromenatal_state_changed)
+
+current_system.init_game_manager(game_manager)
 
 
 ship = Ship(50,50, 6, 6,
@@ -64,6 +74,10 @@ object_processor.create_entity(ship)
 controller.init_ship(ship)
 GUI.init_ship(ship)
 GUI.inventory.init_ship(ship)
+drawer.init_ship(ship)
+
+
+ship.init_game_manager(game_manager)
 
 ship1 = Ship(150,90, 6, 6,
             object_processor)
@@ -113,11 +127,6 @@ while not controller.game_exit:
     for event in pygame.event.get():
         controller.process_event(event)
     controller.count_still_mouse_ticks(pygame.mouse.get_pos())
-
-
-    # TODO: fix zoom
-    # for entity in current_system.entities:
-    #         resource_manager.zoom(entity)
 
     GUI.animate()
 

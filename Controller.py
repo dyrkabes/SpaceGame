@@ -46,12 +46,14 @@ class Controller:
                     clicked_object = ClickManager.instance_clicked(Drawer.real_world_mouse(event.pos), self.current_system)
 
                     if clicked_object:
+                        # TODO: move the logic away
                         if clicked_object.type == Constants.GeneralConstants.SHIP and clicked_object.player_ship:
                             self.GUI.switch_inventory()
                             # print("CLICKED")
                         elif (clicked_object.type == Constants.GeneralConstants.SHIP
                                 or clicked_object.type == Constants.GeneralConstants.COMET
-                                or clicked_object.type == Constants.GeneralConstants.OUTER_SPACE_OBJECT):
+                                or clicked_object.type == Constants.GeneralConstants.OUTER_SPACE_OBJECT
+                              or clicked_object.type == Constants.GeneralConstants.PLANET):
                             self.ship.create_order(clicked_object)
                     else:
 
@@ -136,6 +138,11 @@ class Controller:
         else:
             self.still_mouse_ticks = 0
             self.mouse_pos = mouse_pos
+
+
+    # TODO: prevent from moving, ordering etc
+    def enviroment_state_changed(self):
+        pass
 
 
 

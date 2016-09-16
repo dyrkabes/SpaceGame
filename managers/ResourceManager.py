@@ -46,6 +46,7 @@ class ResourceManager:
 
     @staticmethod
     def zoom(entity, real_world_objects=True):
+        # real world - describe
         if real_world_objects:
             entity.image = pygame.transform.smoothscale(entity.image_default,
                                               (entity.x_size*Settings.GRID_SIZE, entity.y_size*Settings.GRID_SIZE))
@@ -54,13 +55,30 @@ class ResourceManager:
                                               (entity.x_size, entity.y_size))
 
     @staticmethod
-    def rotate(entity):
-        entity.image = pygame.transform.smoothscale(entity.image_default,
-                                              (entity.x_size*Settings.GRID_SIZE, entity.y_size*Settings.GRID_SIZE ))
-        # TEST PART
-        if entity.type == Constants.GeneralConstants.PLANET_SHADE:
-            entity.image = pygame.transform.scale(entity.image_default,
-                                              (entity.x_size*Settings.GRID_SIZE, entity.y_size*Settings.GRID_SIZE ))
-        # ENDED
+    def rotate(entity, game_state=None):
+        # TODO: All the zoom and state issues move to the zoom function. Otherwise non rotetable are not affected!
+        # Dont like the code repeating some much. Needs some thinking over it
+        if game_state != Constants.StateConstants.LANDED:
+            if entity.type == Constants.GeneralConstants.PLANET_SHADE:
+                entity.image = pygame.transform.scale(entity.image_default,
+                                                  (entity.x_size*Settings.GRID_SIZE, entity.y_size*Settings.GRID_SIZE))
+            else:
+                ResourceManager.zoom(entity)
+        elif game_state == Constants.StateConstants.LANDED:
+            # from constants loading the list of zoomable during landed state
+            grid_size = Constants.ZoomsInLandedState.get_zoom_value(entity.type)
+            print(grid_size)
+            grid_size = grid_size[1]
+            if grid_size:
+                entity.image = pygame.transform.smoothscale(entity.image_default,
+                                                  (entity.x_size*grid_size, entity.y_size*grid_size))
+            else:
+                if entity.type != Constants.GeneralConstants.PLANET_SHADE:
+                    ResourceManager.zoom(entity)
+                else:
+                    entity.image = pygame.transform.scale(entity.image_default,
+                                                  (entity.x_size*Settings.GRID_SIZE, entity.y_size*Settings.GRID_SIZE))
+            # zooming zoomable. Non zoomable zoom to default value of 5
+
 
         entity.image = pygame.transform.rotate(entity.image, -entity.angle)

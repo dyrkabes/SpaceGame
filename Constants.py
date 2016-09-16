@@ -34,6 +34,10 @@ class GUIConstants:
 class StateConstants:
     RUNNING = "running"
     WAITING = "waiting"
+    OUTER_SPACE = "outer_space"
+    PIT_STOP = "pit_stop"
+    LANDED = "landed"
+    LANDING = "landing"
 
 class CollidableTypes:
     BULLET = "bullet"
@@ -64,7 +68,8 @@ class ModuleTypes:
     ENGINE_ROTATION_SPEED = "rotation_speed"
 
 class ZDimensions:
-    types_and_values = [
+    # types and z dimensions I meant
+    types_and_zs = [
     (GeneralConstants.SHIP, 10),
     (GeneralConstants.POINT, 9),
     (GeneralConstants.COMET, 10),
@@ -80,8 +85,30 @@ class ZDimensions:
 
     @staticmethod
     def get_z(type):
-        for item in ZDimensions.types_and_values:
+        for item in ZDimensions.types_and_zs:
             if item[0] == type:
                 return item[1]
 
+class ZoomsInLandedState:
+    # Probably not the best way. Tho:
+    # Pair (type, default_grid_size)
+    # If None then it chooses current zoom
+    types_and_zooms = [
+        (GeneralConstants.SHIP, 5),
+        (GeneralConstants.POINT, 5),
+        (GeneralConstants.COMET, 5),
+        (GeneralConstants.STAR, None),
+        (GeneralConstants.PLANET, None),
+        (GeneralConstants.PLANET_SHADE, None),
+        (GeneralConstants.OUTER_SPACE_OBJECT, 5),
+        (GeneralConstants.BULLET, 5),
+        (GeneralConstants.TEXT, 5),
+        (GeneralConstants.AIM_MARKER, 5),
+        (GeneralConstants.EXPLOSION, 5)
+    ]
+
+    @staticmethod
+    def get_zoom_value(type):
+        return [item for item in ZoomsInLandedState.types_and_zooms
+                if item[0] == type].pop()
 

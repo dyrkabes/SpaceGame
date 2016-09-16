@@ -10,9 +10,14 @@ class Drawer:
 
     def __init__(self):
         pygame.init()
-
-
         self.game_display = pygame.display.set_mode((Settings.screen_width, Settings.screen_height))
+
+        self.current_system = None
+        self.GUI = None
+        # I still think about how to position the ship (giving it to drawer who shouldnt have any game logic
+        # seems pretty bad for me. Tho is already has cur_sys and GUI
+        self.ship = None
+        self.game_manager = None
 
     def set_current_system(self, current_system):
         self.current_system = current_system
@@ -21,7 +26,15 @@ class Drawer:
     def init_GUI(self, GUI):
         self.GUI = GUI
 
+    def init_game_manager(self, game_manager):
+        self.game_manager = game_manager
+
+    def init_ship(self, ship):
+        self.ship = ship
+
     def draw_entities(self):
+        # Trello fall so i will write it there
+        # TODO: Draw (and rotozoom) nothing except the objects which are close to camera
         z_list = [[] for i in range(12)]
         for entity in self.current_system.entities:
             z_value = Constants.ZDimensions.get_z(entity.type)
@@ -72,6 +85,13 @@ class Drawer:
         " return coordinates of mouse clicked concerning zoom and camera offset"
         return (mouse_pos[0] / Settings.GRID_SIZE + Drawer.camera.x_coordinate,
             mouse_pos[1] / Settings.GRID_SIZE + Drawer.camera.y_coordinate)
+
+    def enviromenatal_state_changed(self):
+        if self.game_manager.enviroment_state == Constants.StateConstants.LANDED:
+            self.camera.move_to(
+                self.ship.x_coordinate - 10,
+                self.ship.y_coordinate - 10
+            )
 
     def quit(self):
         pygame.quit()

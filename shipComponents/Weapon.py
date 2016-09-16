@@ -70,7 +70,7 @@ class Weapon(Component):
             self.type,
         )
         module.add_module_type_and_value(Constants.ModuleTypes.WEAPON_RELOAD,
-            1)
+            0.1)
         self.add_module(module)
 
 
@@ -85,7 +85,7 @@ class Weapon(Component):
         module = ComponentModule(
             self.type
         )
-        module.add_module_type_and_value(Constants.ModuleTypes.AMOUNT_OF_SHOTS, 4)
+        module.add_module_type_and_value(Constants.ModuleTypes.AMOUNT_OF_SHOTS, 1)
         module.add_module_restriction(Constants.ModuleTypes.WEAPON_RELOAD, 1)
         self.add_module(module)
 
@@ -93,7 +93,7 @@ class Weapon(Component):
         module = ComponentModule(
             self.type
         )
-        module.add_module_type_and_value(Constants.ModuleTypes.SHOTGUN, 2)
+        module.add_module_type_and_value(Constants.ModuleTypes.SHOTGUN, 1)
         module.add_module_restriction(Constants.ModuleTypes.BULLET_DAMAGE, 0.3)
         # module.add_module_restriction(Constants.ModuleTypes.BULLET_CORRUPTION, 90)
         self.add_module(module)
