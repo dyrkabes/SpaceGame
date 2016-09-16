@@ -4,12 +4,12 @@ import Constants
 from Entity import Entity
 
 class InfoLabel(Entity):
-    def __init__(self, x_coordinate, y_coordinate, decrease_message_count):
-        Entity.__init__(self, x_coordinate-3, y_coordinate-3, x_size=10, y_size=10)
+    def __init__(self, x_coordinate, y_coordinate, decrease_message_count, type=Constants.GeneralConstants.TEXT):
+        Entity.__init__(self, x_coordinate-3, y_coordinate-3, 10, 10, type)
         self.font = pygame.font.Font(None, 22)
         self.images_names = ["text.png"]
         self.collidable_type = Constants.CollidableTypes.NON_COLLIDABLE
-        self.type = Constants.GeneralConstants.TEXT
+        # self.type = Constants.GeneralConstants.TEXT
         self.rotatable = False
         self.cycles = 0
 

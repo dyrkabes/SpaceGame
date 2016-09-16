@@ -3,8 +3,8 @@ import pygame
 from Entity import Entity
 
 class ComponentModule(Entity):
-    def __init__(self, component_type, name="module"):
-        Entity.__init__(self, 0, 0, 25, 25)
+    def __init__(self, component_type, name="module", type=None):
+        Entity.__init__(self, 0, 0, 25, 25, type)
         self.component_type = component_type
         self.types_and_values = []
         self.hit_points = 2

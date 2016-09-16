@@ -45,7 +45,8 @@ class CurrentSystem:
                     or entity.type == Constants.GeneralConstants.TEXT
                     or entity.type == Constants.GeneralConstants.STAR
                     or entity.type == Constants.GeneralConstants.AIM_MARKER
-                  or entity.type == Constants.GeneralConstants.EXPLOSION):
+                    or entity.type == Constants.GeneralConstants.PLANET
+                    or entity.type == Constants.GeneralConstants.EXPLOSION):
                 if entity.type == Constants.GeneralConstants.COMET:
                     GravityManager.apply_gravity_effects(entity, self.star)
                 if entity.type == Constants.GeneralConstants.SHIP:

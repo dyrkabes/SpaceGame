@@ -29,8 +29,8 @@ from managers.OrderHelper import OrderHelper
 class Ship(Entity):
     # TODO: Needs lots of refactor. Probably some helper classes
     id = 0
-    def __init__(self, x_coordinate, y_coordinate, x_size, y_size, object_processor):
-        Entity.__init__(self, x_coordinate, y_coordinate, x_size, y_size)
+    def __init__(self, x_coordinate, y_coordinate, x_size, y_size, object_processor, type=Constants.GeneralConstants.SHIP):
+        Entity.__init__(self, x_coordinate, y_coordinate, x_size, y_size, type)
 
         self.x_movement_speed = 0
         self.y_movement_speed = 0
@@ -52,7 +52,7 @@ class Ship(Entity):
         self.path_found = None
 
         self.ship_id = copy.copy(Ship.id)
-        self.type = Constants.GeneralConstants.SHIP
+        # self.type = Constants.GeneralConstants.SHIP
         self.player_ship = False
         self.collidable_type = Constants.CollidableTypes.COLLIDE_TARGET
 

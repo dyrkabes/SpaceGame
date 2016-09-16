@@ -2,13 +2,13 @@ from Entity import Entity
 import Constants
 
 class Explosion(Entity):
-    def __init__(self, x_coordinate, y_coordinate):
-        Entity.__init__(self, x_coordinate, y_coordinate, 2, 2)
+    def __init__(self, x_coordinate, y_coordinate, type=Constants.GeneralConstants.EXPLOSION):
+        Entity.__init__(self, x_coordinate, y_coordinate, 2, 2, type)
 
         self.break_delay = 3
         self.current_delay = 0
         self.collidable_type = Constants.CollidableTypes.NON_COLLIDABLE
-        self.type = Constants.GeneralConstants.EXPLOSION
+        # self.type = Constants.GeneralConstants.EXPLOSION
 
         self.rotatable = False
         # del?

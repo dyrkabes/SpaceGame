@@ -8,10 +8,11 @@ from shipComponents.Component import Component
 from shipComponents.ComponentModule import ComponentModule
 
 class Inventory(Entity):
-    def __init__(self, x_coordinate=50, y_coordinate=50):
-        Entity.__init__(self, x_coordinate=200, y_coordinate=200, x_size=400, y_size=400)
+    def __init__(self, x_coordinate=50, y_coordinate=50,
+                 type = Constants.GUIConstants.INVENTORY):
+        Entity.__init__(self, x_coordinate=200, y_coordinate=200, x_size=400, y_size=400, type=Constants.GUIConstants.INVENTORY)
         self.visible = False
-        self.type = Constants.GUIConstants.INVENTORY
+        # self.type = Constants.GUIConstants.INVENTORY
         self.set_image = None
         self.zoom = None
 

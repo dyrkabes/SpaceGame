@@ -7,7 +7,7 @@ from Animation import Animation
 
 class Entity(pygame.sprite.Sprite):
     def __init__(self, x_coordinate, y_coordinate,
-                 x_size, y_size):
+                 x_size, y_size, type):
         pygame.sprite.Sprite.__init__(self)
 
         # these are the coordinates of the center
@@ -31,6 +31,19 @@ class Entity(pygame.sprite.Sprite):
 
         # TODO: rework zoom needed for every object
         self.zoom_needed = False
+
+        self.type = type
+
+
+
+
+
+        # self.z_dimension = Constants.ZDimensions.POINT
+
+
+
+
+
 
     def init_animation(self, images_names, delay_count):
         self.animatable = True

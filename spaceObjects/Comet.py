@@ -2,8 +2,9 @@ from Entity import Entity
 import Constants
 
 class Comet(Entity):
-    def __init__(self, x_coordinate, y_coordinate, x_size, y_size, x_movement_speed, y_movement_speed, weight):
-        Entity.__init__(self, x_coordinate, y_coordinate, x_size, y_size)
+    def __init__(self, x_coordinate, y_coordinate, x_size, y_size, x_movement_speed, y_movement_speed, weight,
+                 type=Constants.GeneralConstants.COMET):
+        Entity.__init__(self, x_coordinate, y_coordinate, x_size, y_size, type)
 
         self.x_movement_speed = x_movement_speed
         self.y_movement_speed = y_movement_speed
@@ -17,7 +18,7 @@ class Comet(Entity):
 
         self.weight = weight
 
-        self.type = Constants.GeneralConstants.COMET
+        # self.type = Constants.GeneralConstants.COMET
 
         self.component_type = Constants.ShipConstants.WEAPON
 

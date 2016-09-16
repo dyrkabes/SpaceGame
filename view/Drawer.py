@@ -22,11 +22,17 @@ class Drawer:
         self.GUI = GUI
 
     def draw_entities(self):
+        z_list = [[] for i in range(12)]
         for entity in self.current_system.entities:
-            rect = entity.image.get_height()
-            entity.rect = [(entity.x_coordinate - self.camera.x_coordinate - rect/2/Settings.GRID_SIZE)* Settings.GRID_SIZE,
-                         (entity.y_coordinate - self.camera.y_coordinate - rect/2/Settings.GRID_SIZE)* Settings.GRID_SIZE]
-            self.game_display.blit(entity.image, entity.rect)
+            z_value = Constants.ZDimensions.get_z(entity.type)
+            z_list[z_value].append(entity)
+
+        for elements in z_list:
+            for entity in elements:
+                rect = entity.image.get_height()
+                entity.rect = [(entity.x_coordinate - self.camera.x_coordinate - rect/2/Settings.GRID_SIZE)* Settings.GRID_SIZE,
+                             (entity.y_coordinate - self.camera.y_coordinate - rect/2/Settings.GRID_SIZE)* Settings.GRID_SIZE]
+                self.game_display.blit(entity.image, entity.rect)
 
     def draw_GUI(self):
         for element in self.GUI.elements:

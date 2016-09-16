@@ -4,15 +4,15 @@ import Constants
 from Entity import Entity
 
 class Button(Entity):
-    def __init__(self, x_coordinate, y_coordinate, x_size, y_size):
-        Entity.__init__(self, x_coordinate, y_coordinate, x_size, y_size)
+    def __init__(self, x_coordinate, y_coordinate, x_size, y_size, type=Constants.GUIConstants.BUTTON):
+        Entity.__init__(self, x_coordinate, y_coordinate, x_size, y_size, type)
 
         # For type like go, etc
         self.button_type = None
 
         self.state = Constants.GUIConstants.DEFAULT
 
-        self.type = Constants.GUIConstants.BUTTON
+        # self.type = Constants.GUIConstants.BUTTON
 
         self.action = None
 

@@ -2,11 +2,11 @@ from Entity import Entity
 import Constants
 
 class OuterSpaceObject(Entity):
-    def __init__(self, x_coordinate, y_coordinate, x_size, y_size, weight):
-         Entity.__init__(self,x_coordinate, y_coordinate, x_size, y_size)
+    def __init__(self, x_coordinate, y_coordinate, x_size, y_size, weight, type=Constants.GeneralConstants.OUTER_SPACE_OBJECT):
+         Entity.__init__(self,x_coordinate, y_coordinate, x_size, y_size, type)
          self.weight = weight
 
-         self.type = Constants.GeneralConstants.OUTER_SPACE_OBJECT
+         # self.type = Constants.GeneralConstants.OUTER_SPACE_OBJECT
 
          self.rotatable = False
 

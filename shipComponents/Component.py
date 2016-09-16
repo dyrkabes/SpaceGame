@@ -6,7 +6,7 @@ from Entity import Entity
 
 class Component(Entity):
     def __init__(self, type, ship):
-        Entity.__init__(self, 0, 0, 50, 50)
+        Entity.__init__(self, 0, 0, 50, 50, type=None)
         self.type = type
         self.state_manager = ship.state_manager
         self.modules = []

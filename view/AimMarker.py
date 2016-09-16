@@ -6,16 +6,17 @@ import math
 
 
 class AimMarker(Entity):
-    def __init__(self, target, x_size=4, y_size=4):
+    def __init__(self, target, x_size=4, y_size=4, type=Constants.GeneralConstants.AIM_MARKER):
 
         Entity.__init__(self, self.shift_from_target(target.x_coordinate),
-                        self.shift_from_target(target.y_coordinate), x_size, y_size)
+                        self.shift_from_target(target.y_coordinate), x_size, y_size,
+                        type)
 
         self.target = target
         self.rotatable = False
 
         self.collidable_type = Constants.CollidableTypes.NON_COLLIDABLE
-        self.type = Constants.GeneralConstants.AIM_MARKER
+        # self.type = Constants.GeneralConstants.AIM_MARKER
 
 
         self.images_names = ["aim_marker.png"]

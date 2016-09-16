@@ -2,11 +2,10 @@ from Entity import Entity
 import Constants
 
 class Star(Entity):
-    def __init__(self, x_coordinate, y_coordinate, x_size, y_size):
-        Entity.__init__(self,x_coordinate, y_coordinate, x_size, y_size)
+    def __init__(self, x_coordinate, y_coordinate, x_size, y_size, type=Constants.GeneralConstants.STAR):
+        Entity.__init__(self,x_coordinate, y_coordinate, x_size, y_size, type)
 
         self.weight = 5000
-        self.type = Constants.GeneralConstants.STAR
 
         self.rotatable = False
 

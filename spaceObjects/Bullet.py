@@ -12,9 +12,10 @@ from Animation import Animation
 import Settings
 
 class Bullet(Entity):
-    def __init__(self, x_coordinate, y_coordinate, x_size, y_size, movement_speed_max, x_destination, y_destination, ship_id, damage, bullet_duration):
+    def __init__(self, x_coordinate, y_coordinate, x_size, y_size, movement_speed_max, x_destination, y_destination, ship_id,
+                 damage, bullet_duration, type=Constants.GeneralConstants.BULLET):
 
-        Entity.__init__(self, x_coordinate, y_coordinate, x_size, y_size)
+        Entity.__init__(self, x_coordinate, y_coordinate, x_size, y_size, type)
 
         self.rotatable = True
 

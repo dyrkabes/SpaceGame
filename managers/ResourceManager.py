@@ -57,4 +57,10 @@ class ResourceManager:
     def rotate(entity):
         entity.image = pygame.transform.smoothscale(entity.image_default,
                                               (entity.x_size*Settings.GRID_SIZE, entity.y_size*Settings.GRID_SIZE ))
+        # TEST PART
+        if entity.type == Constants.GeneralConstants.PLANET_SHADE:
+            entity.image = pygame.transform.scale(entity.image_default,
+                                              (entity.x_size*Settings.GRID_SIZE, entity.y_size*Settings.GRID_SIZE ))
+        # ENDED
+
         entity.image = pygame.transform.rotate(entity.image, -entity.angle)

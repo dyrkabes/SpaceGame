@@ -3,6 +3,8 @@ class GeneralConstants:
     POINT = "point"
     COMET = "comet"
     STAR = "star"
+    PLANET = "planet"
+    PLANET_SHADE = "planet_shade"
     OUTER_SPACE_OBJECT = "outer_space_object"
     BULLET = "bullet"
     TEXT = "text"
@@ -61,5 +63,25 @@ class ModuleTypes:
     ENGINE_SPEED = "movement_speed"
     ENGINE_ROTATION_SPEED = "rotation_speed"
 
+class ZDimensions:
+    types_and_values = [
+    (GeneralConstants.SHIP, 10),
+    (GeneralConstants.POINT, 9),
+    (GeneralConstants.COMET, 10),
+    (GeneralConstants.STAR, 0),
+    (GeneralConstants.PLANET, 0),
+    (GeneralConstants.PLANET_SHADE, 1),
+    (GeneralConstants.OUTER_SPACE_OBJECT, 9),
+    (GeneralConstants.BULLET, 10),
+    (GeneralConstants.TEXT, 11),
+    (GeneralConstants.AIM_MARKER, 11),
+    (GeneralConstants.EXPLOSION, 11)
+    ]
+
+    @staticmethod
+    def get_z(type):
+        for item in ZDimensions.types_and_values:
+            if item[0] == type:
+                return item[1]
 
 

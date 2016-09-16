@@ -13,6 +13,7 @@ from managers.ObjectProcessor import ObjectProcessor
 from managers.ResourceManager import ResourceManager
 from spaceObjects.Ship import Ship
 from spaceObjects.Star import Star
+from spaceObjects.Planet import Planet
 from view.Drawer import Drawer
 from view.GUI import GUI
 from view.InterfaceElements.Button import Button
@@ -89,6 +90,11 @@ object_processor.create_entity(ship2)
 
 
 object_processor.create_entity(Star(current_system.x_dimension/2, current_system.y_dimension/2, 50, 50))
+
+planet = Planet(52, 52, 28, 28)
+planet.init_star(current_system.star)
+object_processor.create_entity(planet)
+object_processor.create_entity(planet.planet_shade)
 
 # later this one up and cur sys throws when to check entity
 collision_manager.init_current_system(current_system)

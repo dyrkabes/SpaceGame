@@ -4,10 +4,10 @@ import Constants
 from Entity import Entity
 
 class InfoPlate(Entity):
-    def __init__(self, x_coordinate, y_coordinate, x_size=225, y_size=250):
-        Entity.__init__(self, x_coordinate, y_coordinate, x_size, y_size)
+    def __init__(self, x_coordinate, y_coordinate, x_size=225, y_size=250, type=Constants.GUIConstants.INFO_PLATE):
+        Entity.__init__(self, x_coordinate, y_coordinate, x_size, y_size, type)
 
-        self.type = Constants.GUIConstants.INFO_PLATE
+        # self.type = Constants.GUIConstants.INFO_PLATE
         self.visible = True
 
         self.image = pygame.Surface((x_size, y_size))
