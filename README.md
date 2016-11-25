@@ -1,3 +1,5 @@
+Development is on hold bc I am deep in swift atm
+
 # SpaceGame
 Space game inspired by SpaceRangers, FTL and some others
 
